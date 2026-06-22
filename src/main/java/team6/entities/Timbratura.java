@@ -12,9 +12,14 @@ public class Timbratura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "id_mezzo", nullable = false)
     private Mezzo mezzo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_biglietto", nullable = false)
+    private Biglietto biglietto;
 
     public Timbratura() {
 
@@ -23,6 +28,7 @@ public class Timbratura {
     public Timbratura(LocalDate data_timbratura) {
         this.data_timbratura = data_timbratura;
         this.mezzo = mezzo;
+        this.biglietto = biglietto;
     }
 
     public Long getId() {
@@ -37,12 +43,17 @@ public class Timbratura {
         return mezzo;
     }
 
+    public Biglietto getBiglietto() {
+        return biglietto;
+    }
+
     @Override
     public String toString() {
         return "Timbratura{" +
-                "id=" + id +
-                ", data_timbratura=" + data_timbratura +
+                "data_timbratura=" + data_timbratura +
+                ", id=" + id +
                 ", mezzo=" + mezzo +
+                ", biglietto=" + biglietto +
                 '}';
     }
 }
