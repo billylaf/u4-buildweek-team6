@@ -4,6 +4,8 @@ package team6.entities;
 import jakarta.persistence.*;
 import team6.enums.tipoVeicolo;
 
+import java.util.List;
+
 @Entity
 @Table(name = "mezzi")
 public class Mezzo {
@@ -14,6 +16,8 @@ public class Mezzo {
     private int capienza;
 
     private tipoVeicolo veicolo;
+    @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
+    private List<StatoMezzo> stato_mezzo;
 
     public Mezzo() {
 
