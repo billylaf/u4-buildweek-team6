@@ -16,8 +16,12 @@ public class Mezzo {
     private int capienza;
 
     private tipoVeicolo veicolo;
+
     @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
-    private List<StatoMezzo> stato_mezzo;
+    private List<StatoMezzo> stato_mezzi;
+
+    @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
+    private List<Timbratura> timbrature;
 
     public Mezzo() {
 

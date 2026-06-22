@@ -6,7 +6,7 @@ import team6.enums.StatoDiMezzo;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "stato_mezzo")
+@Table(name = "stato_mezzi")
 public class StatoMezzo {
 
     LocalDate data_inizio;
