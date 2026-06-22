@@ -14,19 +14,19 @@ public class Percorenza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ora_partenza")
+    @Column(name = "ora_partenza", nullable = false)
     private Timestamp oraPartenza;
 
-    @Column(name = "ora_arrivo")
+    @Column(name = "ora_arrivo", nullable = false)
     private Timestamp oraArrivo;
 
     @Column(name = "percorrenza_effettiva")
     private int percorrenzaEffettiva;
 
-    @Column(name = "id_mezzo")
+    @Column(name = "id_mezzo", nullable = false)
     private Long idMezzo;
 
-    @Column(name = "id_tratta")
+    @Column(name = "id_tratta", nullable = false)
     private Long idTratta;
 
     public Percorenza(){}
