@@ -24,13 +24,22 @@ public class Abbonamento extends AcquistoViaggio{
         super(dataEmissione, puntoVendita);
         this.tipo=tipo;
         this.tessera=tessera;
-        //Calcolo con un if se è settimanale scadenza a sette giorni mensile 1 mese utilizzo i metodi di localdate confrontandolo con l'enum
+        // Calcolo con un if se è settimanale scadenza a sette giorni mensile 1 mese utilizzo i metodi di localdate confrontandolo con l'enum
         if (tipo==TipoAbbonamento.SETTIMANALE){
             this.dataScadenza=dataEmissione.plusDays(7);
         } else { // è mensile aggiungo un mese
             this.dataScadenza=dataEmissione.plusMonths(1);
         }
     }
+
+    public boolean isValid() {
+        boolean abbonamentoNonScaduto = java.time.LocalDate.now().isBefore(this.dataScadenza)
+                || java.time.LocalDate.now().isEqual(this.dataScadenza);
+
+        //L'abbonamento è valido solo se non è scaduto E se la tessera è ancora attiva
+        return abbonamentoNonScaduto && !this.tessera.isScaduta();
+    }
+
     public TipoAbbonamento getTipo() {
         return tipo;
     }

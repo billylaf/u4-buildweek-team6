@@ -34,6 +34,10 @@ public class Tessera {
         this.utente=utente;
     }
 
+    public boolean isScaduta() {
+        return java.time.LocalDate.now().isAfter(this.dataScadenza);
+    }
+
     public Long getId() {
         return id;
     }
