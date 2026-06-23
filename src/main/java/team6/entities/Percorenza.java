@@ -30,7 +30,8 @@ public class Percorenza {
     @Column(name = "id_tratta", nullable = false)
     private Long idTratta;
 
-    public Percorenza(){}
+    public Percorenza() {
+    }
 
     public Percorenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Long idTratta) {
         this.oraPartenza = oraPartenza;
@@ -39,7 +40,7 @@ public class Percorenza {
         this.mezzo = mezzo;
 
 
-        if (oraPartenza !=null && oraArrivo != null){
+        if (oraPartenza != null && oraArrivo != null) {
             long minuti = ChronoUnit.MINUTES.between(oraPartenza.toInstant(), oraArrivo.toInstant());
             this.percorrenzaEffettiva = (int) minuti;
         } else {
@@ -102,7 +103,7 @@ public class Percorenza {
                 ", oraPartenza=" + oraPartenza +
                 ", oraArrivo=" + oraArrivo +
                 ", percorrenzaEffettiva=" + percorrenzaEffettiva +
-                ", idMezzo=" + idMezzo +
+                ", id mezzo=" + mezzo +
                 ", idTratta=" + idTratta +
                 '}';
     }

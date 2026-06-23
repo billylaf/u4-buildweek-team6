@@ -1,37 +1,43 @@
 package team6.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "biglietti")
 public class Biglietto extends AcquistoViaggio {
-    private boolean vidimato; // true o false se è obliterato/validato
 
+    private LocalDate data_validazione;
 
-    @OneToMany(mappedBy = "biglietto", cascade = CascadeType.ALL)
-    private List<Timbratura> timbrature;
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo", nullable = false)
+    private Mezzo mezzo;
 
     public Biglietto() {
     }
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita) {
+    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, LocalDate data_validazione) {
         super(dataEmissione, puntoVendita);
-        this.vidimato = false; // quando lo compro è nuovo quindi non validato/obliterato
-
+        this.data_validazione = data_validazione;// quando lo compro è nuovo quindi non validato/obliterato
     }
 
-    public boolean isVidimato() {
-        return vidimato;
+    public LocalDate getData_validazione() {
+        return data_validazione;
     }
 
-    public void setVidimato(boolean vidimato) {
-        this.vidimato = vidimato;
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "data_validazione=" + data_validazione +
+                ", mezzo=" + mezzo +
+                '}';
     }
 }
