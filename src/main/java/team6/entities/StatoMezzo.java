@@ -15,6 +15,8 @@ public class StatoMezzo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Enumerated(EnumType.STRING)
     private StatoDiMezzo stato;
 
     @ManyToOne
