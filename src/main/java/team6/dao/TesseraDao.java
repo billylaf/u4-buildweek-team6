@@ -37,6 +37,21 @@ public class TesseraDao {
         } return trovata;
     }
 
+    //Cerca una tessera usando direttamente il suo codice uuid
+    public Tessera findByCodiceTessera(UUID codiceTessera) {
+        jakarta.persistence.TypedQuery<Tessera> query = em.createQuery(
+                "SELECT t FROM Tessera t WHERE t.codTessera = :codice",
+                Tessera.class
+        );
+        query.setParameter("codice", codiceTessera);
+
+        try {
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw new team6.exceptions.ElementoNonTrovatoException("Nessuna tessera trovata con il codice: " + codiceTessera);
+        }
+    }
+
     //Metodi task
     //Rinnova tessera
     public void rinnovaTessera(Long idTessera){
