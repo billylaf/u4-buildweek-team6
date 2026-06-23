@@ -1,42 +1,54 @@
 package team6.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "biglietti")
 public class Biglietto extends AcquistoViaggio {
 
-    private LocalDate data_validazione;
+    @Column(name = "data_validazione")
+    private LocalDate dataValidazione; // Se è NULL il biglietto è nuovo. Se c'è una data, significa che è timbrato.
 
     @ManyToOne
-    @JoinColumn(name = "id_mezzo", nullable = false)
-    private Mezzo mezzo;
+    @JoinColumn(name = "id_mezzo")
+    private Mezzo mezzo; // Il bus o tram su cui viene timbrato il biglietto
 
-    public Biglietto() {
+
+    public Biglietto() {}
+
+
+    public Biglietto(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
+        super(dataAcquisto, prezzo, puntoVendita); // Passa i dati alla classe papà (AcquistoViaggio)
+        this.dataValidazione = null; // All'inizio è nuovo, quindi non ha una data di timbratura
+        this.mezzo = null;           // All'inizio non è ancora salito su nessun mezzo
     }
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, LocalDate data_validazione) {
-        super(dataEmissione, puntoVendita);
-        this.data_validazione = data_validazione;// quando lo compro è nuovo quindi non validato/obliterato
+    //Metodo per capire se il biglietto è stato già usato o no
+    public boolean isVidimato() {
+        return this.dataValidazione != null;
     }
 
-    public LocalDate getData_validazione() {
-        return data_validazione;
+    public LocalDate getDataValidazione() {
+        return dataValidazione;
+    }
+
+    public void setDataValidazione(LocalDate dataValidazione) {
+        this.dataValidazione = dataValidazione;
     }
 
     public Mezzo getMezzo() {
         return mezzo;
     }
 
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
-                "data_validazione=" + data_validazione +
+                "dataValidazione=" + dataValidazione +
                 ", mezzo=" + mezzo +
                 '}';
     }
