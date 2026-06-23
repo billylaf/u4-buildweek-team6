@@ -9,7 +9,6 @@ public abstract class PuntoVendita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String via;
     private String civico;
     private String citta;
