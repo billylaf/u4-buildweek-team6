@@ -27,6 +27,7 @@ public class Distributore extends PuntoVendita{
         this.stato = stato;
     }
 
+
     @Override
     public String toString() {
         return "Distributore{" +

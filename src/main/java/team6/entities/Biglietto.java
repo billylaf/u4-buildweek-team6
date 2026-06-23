@@ -13,7 +13,7 @@ import java.util.UUID;
 @Table(name = "biglietti")
 public class Biglietto extends AcquistoViaggio {
     private boolean vidimato; // true o false se è obliterato/validato
-    private UUID codiceUnivoco;
+
 
     @OneToMany(mappedBy = "biglietto", cascade = CascadeType.ALL)
     private List<Timbratura> timbrature;
@@ -24,7 +24,7 @@ public class Biglietto extends AcquistoViaggio {
     public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita) {
         super(dataEmissione, puntoVendita);
         this.vidimato = false; // quando lo compro è nuovo quindi non validato/obliterato
-        this.codiceUnivoco = UUID.randomUUID();
+
     }
 
     public boolean isVidimato() {
