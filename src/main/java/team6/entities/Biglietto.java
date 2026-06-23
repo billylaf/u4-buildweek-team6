@@ -1,37 +1,54 @@
 package team6.entities;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "biglietti")
 public class Biglietto extends AcquistoViaggio {
-    private boolean vidimato; // true o false se è obliterato/validato
 
+    @Column(name = "data_validazione")
+    private LocalDate dataValidazione;
 
-    @OneToMany(mappedBy = "biglietto", cascade = CascadeType.ALL)
-    private List<Timbratura> timbrature;
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo")
+    private Mezzo mezzo;
 
-    public Biglietto() {
+    public Biglietto() {}
+
+    //Quando compri il biglietto, non è ancora timbrato quindi data e mezzo sono null
+    public Biglietto(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
+        super(dataAcquisto, prezzo, puntoVendita);
+        this.dataValidazione = null;
+        this.mezzo = null;
     }
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita) {
-        super(dataEmissione, puntoVendita);
-        this.vidimato = false; // quando lo compro è nuovo quindi non validato/obliterato
-
-    }
-
+    //Metodo per sapere se è stato usato
     public boolean isVidimato() {
-        return vidimato;
+        return this.dataValidazione != null;
     }
 
-    public void setVidimato(boolean vidimato) {
-        this.vidimato = vidimato;
+    public LocalDate getDataValidazione() {
+        return dataValidazione;
+    }
+
+    public void setDataValidazione(LocalDate dataValidazione) {
+        this.dataValidazione = dataValidazione;
+    }
+
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
+    }
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "dataValidazione=" + dataValidazione +
+                ", mezzo=" + mezzo +
+                '}';
     }
 }

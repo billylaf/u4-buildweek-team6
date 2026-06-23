@@ -27,7 +27,6 @@ public class AcquistoViaggioDAO {
                 throw new DistributoreFuoriServizioException("Impossibile emettere il titolo: questo distributore è fuori servizio!");
             }
         }
-
         //La tessera dell'abbonamento è scaduta?
         if (acquisto instanceof Abbonamento) {
             Abbonamento abb = (Abbonamento) acquisto;
@@ -36,7 +35,6 @@ public class AcquistoViaggioDAO {
                 throw new TesseraScadutaException("Impossibile emettere l'abbonamento: la tessera inserita è scaduta!");
             }
         }
-
         //Se tutti i controlli vanno bene salva nel database
         EntityTransaction tx = em.getTransaction();
         try {
@@ -54,7 +52,7 @@ public class AcquistoViaggioDAO {
     //Conta quanti biglietti e abbonamenti in totale sono stati venduti in un periodo
     public long contaTotaleTitoliEmessi(LocalDate inizio, LocalDate fine) {
         TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(a) FROM AcquistoViaggio a WHERE a.dataEmissione BETWEEN :inizio AND :fine",
+                "SELECT COUNT(a) FROM AcquistoViaggio a WHERE a.dataAcquisto BETWEEN :inizio AND :fine",
                 Long.class
         );
         query.setParameter("inizio", inizio);
@@ -66,7 +64,7 @@ public class AcquistoViaggioDAO {
     //Conta quanti biglietti/abbonamenti sono stati venduti da un solo negozio o macchinetta
     public long contaTitoliPerPuntoVendita(Long idPunto, LocalDate inizio, LocalDate fine) {
         TypedQuery<Long> query = em.createQuery(
-                "SELECT COUNT(a) FROM AcquistoViaggio a WHERE a.puntoVendita.id = :idPunto AND a.dataEmissione BETWEEN :inizio AND :fine",
+                "SELECT COUNT(a) FROM AcquistoViaggio a WHERE a.puntoVendita.id = :idPunto AND a.dataAcquisto BETWEEN :inizio AND :fine",
                 Long.class
         );
         query.setParameter("idPunto", idPunto);

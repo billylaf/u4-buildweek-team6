@@ -12,11 +12,10 @@ public abstract class AcquistoViaggio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codice_univoco", unique = true, nullable = false)
-    private UUID codiceUnivoco;
+    @Column(name = "data_acquisto")
+    private LocalDate dataAcquisto;
 
-    @Column(name = "data_emissione")
-    private LocalDate dataEmissione;
+    private double prezzo;
 
     @ManyToOne
     @JoinColumn(name = "id_punto_vendita")
@@ -24,31 +23,46 @@ public abstract class AcquistoViaggio {
 
     public AcquistoViaggio() {}
 
-    public AcquistoViaggio(LocalDate dataEmissione, PuntoVendita puntoVendita) {
-        this.codiceUnivoco = UUID.randomUUID(); // metodo della classe uuid per generare random il codice
-        this.dataEmissione = dataEmissione;
+    public AcquistoViaggio(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
+        this.dataAcquisto = dataAcquisto;
+        this.prezzo = prezzo;
         this.puntoVendita = puntoVendita;
     }
 
     public Long getId() {
         return id;
     }
-    public UUID getCodiceUnivoco() {
-        return codiceUnivoco;
+
+    public LocalDate getDataAcquisto() {
+        return dataAcquisto;
     }
-    public LocalDate getDataEmissione() {
-        return dataEmissione;
+
+    public void setDataAcquisto(LocalDate dataAcquisto) {
+        this.dataAcquisto = dataAcquisto;
     }
+
+    public double getPrezzo() {
+        return prezzo;
+    }
+
+    public void setPrezzo(double prezzo) {
+        this.prezzo = prezzo;
+    }
+
     public PuntoVendita getPuntoVendita() {
         return puntoVendita;
+    }
+
+    public void setPuntoVendita(PuntoVendita puntoVendita) {
+        this.puntoVendita = puntoVendita;
     }
 
     @Override
     public String toString() {
         return "AcquistoViaggio{" +
                 "id=" + id +
-                ", codiceUnivoco=" + codiceUnivoco +
-                ", dataEmissione=" + dataEmissione +
+                ", dataAcquisto=" + dataAcquisto +
+                ", prezzo=" + prezzo +
                 ", puntoVendita=" + puntoVendita +
                 '}';
     }
