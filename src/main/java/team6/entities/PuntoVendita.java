@@ -9,21 +9,44 @@ public abstract class PuntoVendita {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String indirizzo;
+    private String via;
+    private String civico;
+    private String citta;
 
     public PuntoVendita(){};
 
-    public PuntoVendita(String indirizzo){
-        this.indirizzo=indirizzo;
-    }
+    public PuntoVendita(String via, String civico, String citta) {
+        this.via = via;
+        this.civico = civico;
+        this.citta = citta;
+
+}
+
     public Long getId() {
         return id;
     }
-    public String getIndirizzo() {
-        return indirizzo;
+
+    public String getVia() {
+        return via;
     }
-    public void setIndirizzo(String indirizzo) {
-        this.indirizzo = indirizzo;
+
+    public void setVia(String via) {
+        this.via = via;
+    }
+
+    public String getCivico() {
+        return civico;
+    }
+
+    public void setCivico(String civico) {
+        this.civico = civico;
+    }
+
+    public String getCitta() {
+        return citta;
+    }
+
+    public void setCitta(String citta) {
+        this.citta = citta;
     }
 }

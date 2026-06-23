@@ -73,6 +73,14 @@ public class Percorenza {
         this.oraArrivo = oraArrivo;
     }
 
+    public int getPercorrenzaEffettiva() {
+        return percorrenzaEffettiva;
+    }
+
+    public void setPercorrenzaEffettiva(int percorrenzaEffettiva) {
+        this.percorrenzaEffettiva = percorrenzaEffettiva;
+    }
+
     public Mezzo getMezzo() {
         return mezzo;
     }

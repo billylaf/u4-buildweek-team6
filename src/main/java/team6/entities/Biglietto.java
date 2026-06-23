@@ -1,29 +1,43 @@
 package team6.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 @Entity
-@Table(name = "biglietto")
-public class Biglietto extends AcquistoViaggio{
-    private boolean vidimato; // true o false se è obliterato/validato
-    private UUID codiceUnivoco;
+@Table(name = "biglietti")
+public class Biglietto extends AcquistoViaggio {
 
-    public Biglietto(){}
+    private LocalDate data_validazione;
 
-    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita){
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo", nullable = false)
+    private Mezzo mezzo;
+
+    public Biglietto() {
+    }
+
+    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, LocalDate data_validazione) {
         super(dataEmissione, puntoVendita);
-        this.vidimato=false; // quando lo compro è nuovo quindi non validato/obliterato
-        this.codiceUnivoco = UUID.randomUUID();
+        this.data_validazione = data_validazione;// quando lo compro è nuovo quindi non validato/obliterato
     }
 
-    public boolean isVidimato() {
-        return vidimato;
+    public LocalDate getData_validazione() {
+        return data_validazione;
     }
-    public void setVidimato(boolean vidimato) {
-        this.vidimato = vidimato;
+
+    public Mezzo getMezzo() {
+        return mezzo;
+    }
+
+    @Override
+    public String toString() {
+        return "Biglietto{" +
+                "data_validazione=" + data_validazione +
+                ", mezzo=" + mezzo +
+                '}';
     }
 }

@@ -3,7 +3,17 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="u4-buildweek-team6-pu">
-
+        <class>team6.entities.Utente</class>
+        <class>team6.entities.Tessera</class>
+        <class>team6.entities.PuntoVendita</class>
+        <class>team6.entities.Rivenditore</class>
+        <class>team6.entities.Distributore</class>
+        <class>team6.entities.AcquistoViaggio</class>
+        <class>team6.entities.Biglietto</class>
+        <class>team6.entities.Abbonamento</class>
+        <class>team6.entities.Timbratura</class>
+        <class>team6.entities.Mezzo</class>
+        <class>team6.entities.StatoMezzo</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/u4-buildweek-team6"/>

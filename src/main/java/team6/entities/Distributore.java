@@ -15,9 +15,9 @@ public class Distributore extends PuntoVendita{
 
     public Distributore(){}
 
-    public Distributore(String indirizzo, StatoDistributore stato){
-        super(indirizzo);
-        this.stato=stato;
+    public Distributore(String via, String civico, String citta, StatoDistributore stato) {
+        super(via, civico, citta);
+        this.stato = stato;
     }
 
     public StatoDistributore getStato() {
@@ -26,6 +26,7 @@ public class Distributore extends PuntoVendita{
     public void setStato(StatoDistributore stato) {
         this.stato = stato;
     }
+
 
     @Override
     public String toString() {

@@ -20,25 +20,40 @@ public class Abbonamento extends AcquistoViaggio{
 
     public Abbonamento(){}
 
-    public Abbonamento(LocalDate dataEmissione, PuntoVendita puntoVendita, TipoAbbonamento tipo, Tessera tessera){
-        super(dataEmissione, puntoVendita);
+    public Abbonamento(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita, TipoAbbonamento tipo, Tessera tessera){
+        super(dataAcquisto, prezzo, puntoVendita);
         this.tipo=tipo;
         this.tessera=tessera;
-        //Calcolo con un if se è settimanale scadenza a sette giorni mensile 1 mese utilizzo i metodi di localdate confrontandolo con l'enum
-        if (tipo==TipoAbbonamento.SETTIMANALE){
-            this.dataScadenza=dataEmissione.plusDays(7);
-        } else { // è mensile aggiungo un mese
-            this.dataScadenza=dataEmissione.plusMonths(1);
+        // Calcolo con un if se è settimanale scadenza a sette giorni mensile 1 mese utilizzo i metodi di localdate confrontandolo con l'enum
+        if (tipo == TipoAbbonamento.SETTIMANALE) {
+            this.dataScadenza = dataAcquisto.plusDays(7);
+        } else {
+            this.dataScadenza = dataAcquisto.plusMonths(1);
         }
     }
+
     public TipoAbbonamento getTipo() {
         return tipo;
     }
+
+    public void setTipo(TipoAbbonamento tipo) {
+        this.tipo = tipo;
+    }
+
     public LocalDate getDataScadenza() {
         return dataScadenza;
     }
+
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
+    }
+
     public Tessera getTessera() {
         return tessera;
+    }
+
+    public void setTessera(Tessera tessera) {
+        this.tessera = tessera;
     }
 
     @Override
@@ -50,3 +65,6 @@ public class Abbonamento extends AcquistoViaggio{
                 '}';
     }
 }
+
+
+
