@@ -11,9 +11,10 @@
         <class>team6.entities.AcquistoViaggio</class>
         <class>team6.entities.Biglietto</class>
         <class>team6.entities.Abbonamento</class>
-        <class>team6.entities.Timbratura</class>
         <class>team6.entities.Mezzo</class>
         <class>team6.entities.StatoMezzo</class>
+        <class>team6.entities.Percorrenza</class>
+        <class>team6.entities.Tratta</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/u4-buildweek-team6"/>

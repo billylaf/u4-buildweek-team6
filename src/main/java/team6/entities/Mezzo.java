@@ -23,6 +23,9 @@ public class Mezzo {
     @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
     private List<Biglietto> biglietti;
 
+    @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
+    private List<Percorrenza> percorrenze;
+
     public Mezzo() {
 
     }

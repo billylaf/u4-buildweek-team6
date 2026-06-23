@@ -3,10 +3,7 @@ package team6;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-import team6.dao.AcquistoViaggioDAO;
-import team6.dao.PuntoVenditaDao;
-import team6.dao.TesseraDao;
-import team6.dao.UtenteDao;
+import team6.dao.*;
 import team6.entities.*;
 import team6.enums.StatoDistributore;
 import team6.enums.TipoAbbonamento;
@@ -25,6 +22,10 @@ public class Application {
         TesseraDao tesseraDao = new TesseraDao(em);
         PuntoVenditaDao puntoVenditaDao = new PuntoVenditaDao(em);
         AcquistoViaggioDAO acquistoViaggioDAO = new AcquistoViaggioDAO(em);
+        MezzoDAO mezzoDAO = new MezzoDAO(em);
+        StatoMezzoDAO StatoMezzoDAO = new StatoMezzoDAO(em);
+        PercorrenzaDao PercorrenzaDao = new PercorrenzaDao(em);
+        TrattaDao TrattaDao = new TrattaDao(em);
 
         System.out.println("Test zona 1");
 
