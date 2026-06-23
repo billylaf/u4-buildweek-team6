@@ -78,4 +78,5 @@ public class PercorrenzaDao {
         query.setParameter("idTratta", idTratta);
         return query.getSingleResult(); // restituisce il numero long di viaggi fatti
     }
+
 }
