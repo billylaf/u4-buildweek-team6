@@ -11,6 +11,7 @@ public class StatoMezzo {
 
     LocalDate data_inizio;
     LocalDate data_fine;
+    private String report;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,10 +26,12 @@ public class StatoMezzo {
 
     }
 
-    public StatoMezzo(StatoDiMezzo stato, LocalDate data_inizio, LocalDate data_fine) {
+    public StatoMezzo(StatoDiMezzo stato, LocalDate data_inizio, String report, LocalDate data_fine) {
         this.stato = stato;
         this.data_inizio = data_inizio;
         this.data_fine = data_fine;
+        this.report = report;
+
         this.mezzo = mezzo;
     }
 
@@ -48,6 +51,10 @@ public class StatoMezzo {
         return data_fine;
     }
 
+    public String getReport() {
+        return report;
+    }
+
     public Mezzo getMezzo() {
         return mezzo;
     }
@@ -57,6 +64,7 @@ public class StatoMezzo {
         return "StatoMezzo{" +
                 "data_inizio=" + data_inizio +
                 ", data_fine=" + data_fine +
+                ", report='" + report + '\'' +
                 ", id=" + id +
                 ", stato=" + stato +
                 ", mezzo=" + mezzo +
