@@ -1,6 +1,7 @@
 package team6.entities;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
@@ -15,7 +16,8 @@ public class Biglietto extends AcquistoViaggio {
     private Mezzo mezzo; // Il bus o tram su cui viene timbrato il biglietto
 
 
-    public Biglietto() {}
+    public Biglietto() {
+    }
 
 
     public Biglietto(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
