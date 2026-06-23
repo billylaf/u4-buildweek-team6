@@ -1,53 +1,42 @@
 package team6.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "biglietti")
 public class Biglietto extends AcquistoViaggio {
 
-    @Column(name = "data_validazione")
-    private LocalDate dataValidazione;
+    private LocalDate data_validazione;
 
     @ManyToOne
-    @JoinColumn(name = "id_mezzo")
+    @JoinColumn(name = "id_mezzo", nullable = false)
     private Mezzo mezzo;
 
-    public Biglietto() {}
-
-    //Quando compri il biglietto, non è ancora timbrato quindi data e mezzo sono null
-    public Biglietto(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
-        super(dataAcquisto, prezzo, puntoVendita);
-        this.dataValidazione = null;
-        this.mezzo = null;
+    public Biglietto() {
     }
 
-    //Metodo per sapere se è stato usato
-    public boolean isVidimato() {
-        return this.dataValidazione != null;
+    public Biglietto(LocalDate dataEmissione, PuntoVendita puntoVendita, LocalDate data_validazione) {
+        super(dataEmissione, puntoVendita);
+        this.data_validazione = data_validazione;// quando lo compro è nuovo quindi non validato/obliterato
     }
 
-    public LocalDate getDataValidazione() {
-        return dataValidazione;
-    }
-
-    public void setDataValidazione(LocalDate dataValidazione) {
-        this.dataValidazione = dataValidazione;
+    public LocalDate getData_validazione() {
+        return data_validazione;
     }
 
     public Mezzo getMezzo() {
         return mezzo;
     }
 
-    public void setMezzo(Mezzo mezzo) {
-        this.mezzo = mezzo;
-    }
-
     @Override
     public String toString() {
         return "Biglietto{" +
-                "dataValidazione=" + dataValidazione +
+                "data_validazione=" + data_validazione +
                 ", mezzo=" + mezzo +
                 '}';
     }

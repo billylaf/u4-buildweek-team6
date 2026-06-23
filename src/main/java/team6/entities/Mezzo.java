@@ -21,7 +21,7 @@ public class Mezzo {
     private List<StatoMezzo> stato_mezzi;
 
     @OneToMany(mappedBy = "mezzo", cascade = CascadeType.ALL)
-    private List<Timbratura> timbrature;
+    private List<Biglietto> biglietti;
 
     public Mezzo() {
 
