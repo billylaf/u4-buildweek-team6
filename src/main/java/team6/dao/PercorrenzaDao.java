@@ -81,7 +81,6 @@ public class PercorrenzaDao {
         return query.getSingleResult(); // restituisce il numero long di viaggi fatti
     }
 
-<<<<<<< HEAD
     // calcolo dell media percorrenza di una tratta attraverso un id tratta
     public Double calcolaTempoMedioEffettivo(long idTratta) {
         List<Percorrenza> percorrenze = em
@@ -97,6 +96,5 @@ public class PercorrenzaDao {
                 .mapToInt(Percorrenza::getPercorrenzaEffettiva).average().orElseThrow();
     }
 
-=======
->>>>>>> develop
+
 }
