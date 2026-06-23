@@ -20,7 +20,6 @@ public class Utente {
    @Column(name = "data_nascita")
     private LocalDate dataNascita;
 
-
    public Utente(){}
 
     public Utente(String nome, String cognome, LocalDate dataNascita){
