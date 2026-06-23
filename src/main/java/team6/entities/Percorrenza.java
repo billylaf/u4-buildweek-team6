@@ -83,22 +83,18 @@ public class Percorrenza {
     }
 
     public Long getIdTratta() {
-        return idTratta;
-    }
-
-    public void setIdTratta(Long idTratta) {
-        this.idTratta = idTratta;
+        return tratta.getId();
     }
 
     @Override
     public String toString() {
-        return "Percorenza{" +
+        return "Percorrenza{" +
                 "id=" + id +
                 ", oraPartenza=" + oraPartenza +
                 ", oraArrivo=" + oraArrivo +
                 ", percorrenzaEffettiva=" + getPercorrenzaEffettiva() + " min" +
                 ", idMezzo=" + (mezzo != null ? mezzo.getId() : "null") +
-                ", idTratta=" + idTratta +
+                ", idTratta=" + tratta.getId()+
                 '}';
     }
 }
