@@ -3,8 +3,8 @@ package team6.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import team6.entities.AcquistoViaggio;
 import team6.entities.Abbonamento;
+import team6.entities.AcquistoViaggio;
 import team6.entities.Distributore;
 import team6.enums.StatoDistributore;
 import team6.exceptions.DistributoreFuoriServizioException;
@@ -15,7 +15,9 @@ import java.time.LocalDate;
 public class AcquistoViaggioDAO {
     private final EntityManager em;
 
-    public AcquistoViaggioDAO(EntityManager em) { this.em = em; }
+    public AcquistoViaggioDAO(EntityManager em) {
+        this.em = em;
+    }
 
     //Metodi di utilities
     //Save con i controlli se il distributore da dove stiamo acquistando è fuori servizio
@@ -72,5 +74,24 @@ public class AcquistoViaggioDAO {
         query.setParameter("fine", fine);
 
         return query.getSingleResult(); //restituisce il numero di biglietti in quel rivenditore o macchinetta
+    }
+
+
+    //query per contare quanti bilgietti sono stati timbrati in un mezzo dato l'id
+
+    public long countBigliettiTimbrati(long idMezzo) {
+        return this.em
+                .createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.mezzo.id = :idMezzo AND b.dataValidazione IS NOT NULL", Long.class)
+                .setParameter("idMezzo", idMezzo)
+                .getSingleResult();
+    }
+
+    //query per contare quanti bilgietti sono stati timbrati in un determinato periodo
+    public long countBigliettiTimbratiByPeriodo(LocalDate dataInizio, LocalDate dataFine) {
+        return this.em
+                .createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.dataValidazione BETWEEN :dataInizio AND :dataFine", Long.class)
+                .setParameter("dataInizio", dataInizio)
+                .setParameter("dataFine", dataFine)
+                .getSingleResult();
     }
 }

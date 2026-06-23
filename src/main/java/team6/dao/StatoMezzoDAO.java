@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import team6.entities.StatoMezzo;
 
+import java.util.List;
+
 public class StatoMezzoDAO {
     private final EntityManager entityManager;
 
@@ -26,4 +28,12 @@ public class StatoMezzoDAO {
         System.out.println("Lo stato del mezzo" + newStatoMezzo + " e' stato salvato nel DB");
 
     }
+
+    public List<StatoMezzo> findStoricoByMezzoId(long idMezzo) {
+        return this.entityManager
+                .createQuery("SELECT x FROM StatoMezzo x WHERE x.mezzo.id = :idMezzo ORDER BY x.data_inizio", StatoMezzo.class)
+                .setParameter("idMezzo", idMezzo)
+                .getResultList();
+    }
+
 }
