@@ -83,11 +83,7 @@ public class Percorrenza {
     }
 
     public Long getIdTratta() {
-        return idTratta;
-    }
-
-    public void setIdTratta(Long idTratta) {
-        this.idTratta = idTratta;
+        return tratta.getId();
     }
 
     @Override
@@ -98,7 +94,7 @@ public class Percorrenza {
                 ", oraArrivo=" + oraArrivo +
                 ", percorrenzaEffettiva=" + getPercorrenzaEffettiva() + " min" +
                 ", idMezzo=" + (mezzo != null ? mezzo.getId() : "null") +
-                ", idTratta=" + idTratta +
+                ", idTratta=" + tratta.getId()+
                 '}';
     }
 }
