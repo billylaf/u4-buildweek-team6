@@ -20,9 +20,6 @@ public class Percorenza {
     @Column(name = "ora_arrivo", nullable = false)
     private Timestamp oraArrivo;
 
-    @Column(name = "percorrenza_effettiva")
-    private int percorrenzaEffettiva;
-
     @ManyToOne
     @JoinColumn(name = "id_mezzo", nullable = false)
     private Mezzo mezzo;
@@ -38,13 +35,18 @@ public class Percorenza {
         this.idTratta = idTratta;
         this.mezzo = mezzo;
 
+    }
 
-        if (oraPartenza !=null && oraArrivo != null){
-            long minuti = ChronoUnit.MINUTES.between(oraPartenza.toInstant(), oraArrivo.toInstant());
-            this.percorrenzaEffettiva = (int) minuti;
-        } else {
-            this.percorrenzaEffettiva = 0;
+
+    //Si calcola al volo la percorrenza effettiva, transient serve per dire a hibernate di ignorare il metodo in modo tale
+    //da non creare errori nella creazione
+    @Transient
+    public int getPercorrenzaEffettiva() {
+        if (this.oraPartenza != null && this.oraArrivo != null) {
+            long minuti = ChronoUnit.MINUTES.between(this.oraPartenza.toInstant(), this.oraArrivo.toInstant());
+            return (int) minuti;
         }
+        return 0;
     }
 
     public Long getId() {
@@ -71,14 +73,6 @@ public class Percorenza {
         this.oraArrivo = oraArrivo;
     }
 
-    public int getPercorrenzaEffettiva() {
-        return percorrenzaEffettiva;
-    }
-
-    public void setPercorrenzaEffettiva(int percorrenzaEffettiva) {
-        this.percorrenzaEffettiva = percorrenzaEffettiva;
-    }
-
     public Mezzo getMezzo() {
         return mezzo;
     }
@@ -101,8 +95,8 @@ public class Percorenza {
                 "id=" + id +
                 ", oraPartenza=" + oraPartenza +
                 ", oraArrivo=" + oraArrivo +
-                ", percorrenzaEffettiva=" + percorrenzaEffettiva +
-                ", idMezzo=" + idMezzo +
+                ", percorrenzaEffettiva=" + getPercorrenzaEffettiva() + " min" +
+                ", idMezzo=" + (mezzo != null ? mezzo.getId() : "null") +
                 ", idTratta=" + idTratta +
                 '}';
     }
