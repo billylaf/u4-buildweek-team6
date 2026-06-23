@@ -2,6 +2,7 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import team6.entities.Percorrenza;
 import team6.exceptions.EntityNotFoundException;
 
@@ -65,6 +66,16 @@ public class PercorrenzaDao {
                 t.rollback();
             } throw e;
         }
+    }
 
+    //Metodi task richiesti
+    // Conta quante volte un veicolo ha percorso una determinata tratta
+    public long contaVolteMezzoHaPercorsoTratta(Long idMezzo, Long idTratta){
+        TypedQuery<Long> query = em.createQuery(
+                "SELECT COUNT(p) FROM Percorrenza p WHERE p.mezzo.id = :idMezzo AND p.tratta.id = :idTratta", Long.class
+        );
+        query.setParameter("idMezzo", idMezzo);
+        query.setParameter("idTratta", idTratta);
+        return query.getSingleResult(); // restituisce il numero long di viaggi fatti
     }
 }

@@ -88,7 +88,7 @@ public class Percorrenza {
 
     @Override
     public String toString() {
-        return "Percorenza{" +
+        return "Percorrenza{" +
                 "id=" + id +
                 ", oraPartenza=" + oraPartenza +
                 ", oraArrivo=" + oraArrivo +
