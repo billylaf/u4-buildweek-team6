@@ -8,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 @Entity
 @Table(name = "percorrenze")
-public class Percorenza {
+public class Percorrenza {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,9 +27,9 @@ public class Percorenza {
     @Column(name = "id_tratta", nullable = false)
     private Long idTratta;
 
-    public Percorenza(){}
+    public Percorrenza(){}
 
-    public Percorenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Long idTratta) {
+    public Percorrenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Long idTratta) {
         this.oraPartenza = oraPartenza;
         this.oraArrivo = oraArrivo;
         this.idTratta = idTratta;
