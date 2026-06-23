@@ -26,12 +26,11 @@ public class StatoMezzo {
 
     }
 
-    public StatoMezzo(StatoDiMezzo stato, LocalDate data_inizio, String report, LocalDate data_fine) {
+    public StatoMezzo(StatoDiMezzo stato, LocalDate data_inizio, String report, LocalDate data_fine, Mezzo mezzo) {
         this.stato = stato;
         this.data_inizio = data_inizio;
         this.data_fine = data_fine;
         this.report = report;
-
         this.mezzo = mezzo;
     }
 
@@ -41,6 +40,10 @@ public class StatoMezzo {
 
     public StatoDiMezzo getStato() {
         return stato;
+    }
+
+    public void setStato(StatoDiMezzo stato) {
+        this.stato = stato;
     }
 
     public LocalDate getData_inizio() {
@@ -53,6 +56,10 @@ public class StatoMezzo {
 
     public String getReport() {
         return report;
+    }
+
+    public void setReport(String report) {
+        this.report = report;
     }
 
     public Mezzo getMezzo() {
