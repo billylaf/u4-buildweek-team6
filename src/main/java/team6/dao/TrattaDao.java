@@ -2,30 +2,30 @@ package team6.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import team6.entities.Percorrenza;
+import team6.entities.Tratta;
 import team6.exceptions.EntityNotFoundException;
 
 import java.util.List;
 
-public class PercorrenzaDao {
+public class TrattaDao {
 
     private final EntityManager em;
 
-    public PercorrenzaDao(EntityManager em){
+    public TrattaDao(EntityManager em){
         this.em = em;
     }
 
-    public void save(Percorrenza percorrenza) {
+    public void save(Tratta tratta) {
         EntityTransaction t = em.getTransaction();
 
         try{
             t.begin();
 
-            em.persist(percorrenza);
+            em.persist(tratta);
 
             t.commit();
 
-            System.out.println("La percorrenza: " + percorrenza + " è stata salvata correttamente!");
+            System.out.println("La tratta: " + tratta.getId() + " è stata salvata correttamente!");
         } catch (Exception e) {
             if(t.isActive()) {
                 t.rollback();
@@ -34,20 +34,20 @@ public class PercorrenzaDao {
         }
     }
 
-    public Percorrenza findById(Long id) {
-        Percorrenza p = em.find(Percorrenza.class, id);
+    public Tratta findById(Long id) {
+        Tratta p = em.find(Tratta.class, id);
         if (p == null) {
-            throw new EntityNotFoundException("Percorrenza con ID " + id + " non trovata nel database.");
+            throw new EntityNotFoundException("Tratta con ID " + id + " non trovata nel database.");
         }
         return p;
     }
 
-    public List<Percorrenza> findAll(){
-        return em.createQuery("SELECT p FROM Percorrenza p", Percorrenza.class).getResultList();
+    public List<Tratta> findAll(){
+        return em.createQuery("SELECT p FROM Tratta p", Tratta.class).getResultList();
     }
 
-    public Percorrenza findByIdAndDelete(Long id){
-        Percorrenza p = findById(id);
+    public Tratta findByIdAndDelete(Long id){
+        Tratta p = findById(id);
 
         EntityTransaction t = em.getTransaction();
         try {
@@ -58,7 +58,7 @@ public class PercorrenzaDao {
 
             t.commit();
 
-            System.out.println("La percorrenza con ID: " + p.getId() + "è stata eliminata con successo!");
+            System.out.println("La tratta con ID: " + p.getId() + "è stata eliminata con successo!");
             return p;
         } catch (Exception e) {
             if (t.isActive()){

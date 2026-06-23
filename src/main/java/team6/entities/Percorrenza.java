@@ -24,15 +24,16 @@ public class Percorrenza {
     @JoinColumn(name = "id_mezzo", nullable = false)
     private Mezzo mezzo;
 
-    @Column(name = "id_tratta", nullable = false)
-    private Long idTratta;
+    @ManyToOne
+    @JoinColumn(name = "id_tratta", nullable = false)
+    private Tratta tratta;
 
     public Percorrenza(){}
 
-    public Percorrenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Long idTratta) {
+    public Percorrenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Tratta tratta) {
         this.oraPartenza = oraPartenza;
         this.oraArrivo = oraArrivo;
-        this.idTratta = idTratta;
+        this.tratta = tratta;
         this.mezzo = mezzo;
 
     }
