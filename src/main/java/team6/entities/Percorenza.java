@@ -23,19 +23,20 @@ public class Percorenza {
     @Column(name = "percorrenza_effettiva")
     private int percorrenzaEffettiva;
 
-    @Column(name = "id_mezzo", nullable = false)
-    private Long idMezzo;
+    @ManyToOne
+    @JoinColumn(name = "id_mezzo", nullable = false)
+    private Mezzo mezzo;
 
     @Column(name = "id_tratta", nullable = false)
     private Long idTratta;
 
     public Percorenza(){}
 
-    public Percorenza(Timestamp oraPartenza, Timestamp oraArrivo, Long idMezzo, Long idTratta) {
+    public Percorenza(Timestamp oraPartenza, Timestamp oraArrivo, Mezzo mezzo, Long idTratta) {
         this.oraPartenza = oraPartenza;
         this.oraArrivo = oraArrivo;
-        this.idMezzo = idMezzo;
         this.idTratta = idTratta;
+        this.mezzo = mezzo;
 
 
         if (oraPartenza !=null && oraArrivo != null){
@@ -78,12 +79,12 @@ public class Percorenza {
         this.percorrenzaEffettiva = percorrenzaEffettiva;
     }
 
-    public Long getIdMezzo() {
-        return idMezzo;
+    public Mezzo getMezzo() {
+        return mezzo;
     }
 
-    public void setIdMezzo(Long idMezzo) {
-        this.idMezzo = idMezzo;
+    public void setMezzo(Mezzo mezzo) {
+        this.mezzo = mezzo;
     }
 
     public Long getIdTratta() {
