@@ -31,6 +31,7 @@ public class Application {
         AcquistoViaggioDAO acquistoViaggioDAO = new AcquistoViaggioDAO(em);
         StatoMezzoDAO statoMezzoDao = new StatoMezzoDAO(em);
         PercorrenzaDao percorrenzaDao = new PercorrenzaDao(em);
+        TrattaDao trattaDao = new TrattaDao(em);
 
         final String USER = "admin";
         final String PASS = "Admin1234";
@@ -64,7 +65,7 @@ public class Application {
                         System.out.println("!!Credenziali errate!! ");
                         break;
                     }
-                    gestisciMenuAdmin(scanner, acquistoViaggioDAO, tesseraDao, puntoVenditaDao, statoMezzoDao, percorrenzaDao);
+                    gestisciMenuAdmin(scanner, acquistoViaggioDAO, tesseraDao, puntoVenditaDao, statoMezzoDao, percorrenzaDao, trattaDao);
                     break;
 
                 case 0:
@@ -192,7 +193,7 @@ public class Application {
         }
     }
 
-    private static void gestisciMenuAdmin(Scanner scanner, AcquistoViaggioDAO acquistoViaggioDAO, TesseraDao tesseraDao, PuntoVenditaDao puntoVenditaDao, StatoMezzoDAO statoMezzoDao, PercorrenzaDao percorrenzaDao) {
+    private static void gestisciMenuAdmin(Scanner scanner, AcquistoViaggioDAO acquistoViaggioDAO, TesseraDao tesseraDao, PuntoVenditaDao puntoVenditaDao, StatoMezzoDAO statoMezzoDao, PercorrenzaDao percorrenzaDao, TrattaDao trattaDao) {
         boolean inAdmin = true;
         while (inAdmin) {
             System.out.println("\n--- ACCESSO AMMINISTRATORE ---");
@@ -235,9 +236,11 @@ public class Application {
                         break;
                     case 8:
                         // DAO ZONA 3 - Task: Tenere traccia del numero di volte che un mezzo percorre una tratta
+                        adminQuanteVolteMezzoSuTratta(scanner, percorrenzaDao, trattaDao);
                         break;
                     case 9:
                         // DAO ZONA 3 - Task: Calcolare il tempo medio effettivo di percorrenza di una tratta
+                        adminTempoMedioTratta(scanner, percorrenzaDao, trattaDao);
                         break;
                     case 0:
                         inAdmin = false;
@@ -359,6 +362,28 @@ public class Application {
 
     //Davide
 
+    private static void adminQuanteVolteMezzoSuTratta(Scanner scanner, PercorrenzaDao percorrenzaDao, TrattaDao trattaDao) {
+        System.out.println("\n[Statistica Mezzo su Tratta]");
+        System.out.print("Inserisci l'ID del Mezzo: ");
+        Long idMezzo = leggiLongSicuro(scanner);
+        System.out.print("Inserisci l'ID della Tratta: ");
+        Long idTratta = leggiLongSicuro(scanner);
+
+        Tratta tratta = trattaDao.findById(idTratta);
+
+        long volte = percorrenzaDao.contaVolteMezzoHaPercorsoTratta(idMezzo, idTratta);
+        System.out.println("\nIl mezzo con ID " + idMezzo + " ha percorso la tratta " + idTratta + " per " + volte + " volte.");
+    }
+
+    private static void adminTempoMedioTratta(Scanner scanner, PercorrenzaDao percorrenzaDao, TrattaDao trattaDao) {
+        System.out.println("\n[Statistica Tempo Medio della Linea]");
+        System.out.print("Inserisci l'ID della Tratta da analizzare: ");
+        Long idTratta = leggiLongSicuro(scanner);
+
+            Tratta tratta = trattaDao.findById(idTratta);
+            Double tempoMedio = percorrenzaDao.calcolaTempoMedioEffettivo(idTratta);
+            System.out.println("Il tempo medio effettivo di percorrenza per la tratta " + idTratta + " è di " + String.format("%.2f", tempoMedio) + " minuti.");
+    }
 
     //Fine Davide
 
