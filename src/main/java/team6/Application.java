@@ -288,6 +288,18 @@ public class Application {
         System.out.println("Stato dell'apparato aggiornato sul Database.");
     }
 
+    //Billy
+
+
+
+    //Fine Billy
+
+
+    //Davide
+
+
+    
+    //Fine Davide
 
     //Metodi di controllo per gli input
     private static int leggiNumeroSicuro(Scanner scanner) {
