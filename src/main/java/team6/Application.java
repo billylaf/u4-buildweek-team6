@@ -15,14 +15,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Application {
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("u4-buildweek-team6-pu");
+    private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("u4-buildweek-team6-pu");
 
     public static void main(String[] args) {
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = entityManagerFactory.createEntityManager();
 
-        // ============================================================
-        // ISTANZIA I DAO  ← questo mancava completamente
-        // ============================================================
         UtenteDao utenteDao = new UtenteDao(em);
         TesseraDao tesseraDao = new TesseraDao(em);
         PuntoVenditaDao pvDao = new PuntoVenditaDao(em);
@@ -81,7 +78,6 @@ public class Application {
         em.persist(d3);
         em.persist(d4);
         em.persist(d5);
-        em.getTransaction().commit();
         System.out.println("✔ Distributori inseriti");
 
         // ============================================================
@@ -98,7 +94,6 @@ public class Application {
         em.persist(r3);
         em.persist(r4);
         em.persist(r5);
-        em.getTransaction().commit();
         System.out.println("✔ Rivenditori inseriti");
 
         // ============================================================
@@ -115,7 +110,6 @@ public class Application {
         em.persist(m3);
         em.persist(m4);
         em.persist(m5);
-        em.getTransaction().commit();
         System.out.println("✔ Mezzi inseriti");
 
         // ============================================================
@@ -127,7 +121,6 @@ public class Application {
         em.persist(new StatoMezzo(StatoDiMezzo.IN_SERVIZIO, LocalDate.of(2025, 3, 16), "Rientrato in servizio post manutenzione", null, m2));
         em.persist(new StatoMezzo(StatoDiMezzo.IN_MANUTENZIONE, LocalDate.of(2025, 5, 1), "Guasto al motore", LocalDate.of(2025, 5, 8), m3));
         em.persist(new StatoMezzo(StatoDiMezzo.IN_MANUTENZIONE, LocalDate.of(2025, 6, 5), "Revisione programmata annuale", LocalDate.of(2025, 6, 12), m4));
-        em.getTransaction().commit();
         System.out.println("✔ Stati mezzi inseriti");
 
         // ============================================================
@@ -144,7 +137,6 @@ public class Application {
         em.persist(tr3);
         em.persist(tr4);
         em.persist(tr5);
-        em.getTransaction().commit();
         System.out.println("✔ Tratte inserite");
 
         // ============================================================
@@ -156,7 +148,6 @@ public class Application {
         em.persist(new Percorrenza(Timestamp.valueOf("2025-06-02 07:30:00"), Timestamp.valueOf("2025-06-02 07:52:00"), m1, tr1));
         em.persist(new Percorrenza(Timestamp.valueOf("2025-06-02 10:00:00"), Timestamp.valueOf("2025-06-02 10:14:00"), m3, tr3));
         em.persist(new Percorrenza(Timestamp.valueOf("2025-06-03 11:00:00"), Timestamp.valueOf("2025-06-03 11:33:00"), m4, tr4));
-        em.getTransaction().commit();
         System.out.println("✔ Percorrenze inserite");
 
         // ============================================================
@@ -184,7 +175,6 @@ public class Application {
         em.persist(b3);
         em.persist(b4);
         em.persist(b5);
-        em.getTransaction().commit();
         System.out.println("✔ Biglietti inseriti");
 
         // ============================================================
@@ -196,12 +186,11 @@ public class Application {
         em.persist(new Abbonamento(LocalDate.of(2025, 5, 15), 35.00, d4, TipoAbbonamento.MENSILE, t5));
         em.persist(new Abbonamento(LocalDate.of(2025, 6, 17), 10.00, r3, TipoAbbonamento.SETTIMANALE, t3));
         em.persist(new Abbonamento(LocalDate.of(2025, 6, 5), 35.00, r5, TipoAbbonamento.MENSILE, t5));
-        em.getTransaction().commit();
         System.out.println("✔ Abbonamenti inseriti");
 
         System.out.println("\n=== SEED COMPLETATO: 5 record per ogni tabella ===");
 
         em.close();
-        emf.close();
+        entityManagerFactory.close();
     }
 }
