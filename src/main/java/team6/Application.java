@@ -4,15 +4,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import team6.dao.*;
-import team6.entities.*;
-import team6.enums.StatoDiMezzo;
-import team6.enums.StatoDistributore;
-import team6.enums.TipoAbbonamento;
-import team6.enums.tipoVeicolo;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class Application {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("u4-buildweek-team6-pu");
