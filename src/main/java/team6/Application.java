@@ -32,6 +32,10 @@ public class Application {
         StatoMezzoDAO statoMezzoDao = new StatoMezzoDAO(em);
         PercorrenzaDao percorrenzaDao = new PercorrenzaDao(em);
 
+        final String USER = "admin";
+        final String PASS = "Admin1234";
+
+
         boolean programmaAttivo = true;
 
         System.out.println("SISTEMA DI GESTIONE TRASPORTI METROPOLITANI");
@@ -51,6 +55,15 @@ public class Application {
                     break;
 
                 case 2:
+                    System.out.print("Username: ");
+                    String username = scanner.nextLine();
+                    System.out.print("Password: ");
+                    String password = scanner.nextLine();
+
+                    if (!username.equals(USER) || !password.equals(PASS)) {
+                        System.out.println("!!Credenziali errate!! ");
+                        break;
+                    }
                     gestisciMenuAdmin(scanner, acquistoViaggioDAO, tesseraDao, puntoVenditaDao, statoMezzoDao, percorrenzaDao);
                     break;
 
@@ -192,7 +205,7 @@ public class Application {
             System.out.println("[7] Storico di quante manutenzioni ha fatto un singolo Mezzo");
             System.out.println("[8] Controlla quante volte un mezzo ha percorso una tratta");
             System.out.println("[9] Calcola il tempo medio di viaggio di una linea");
-            System.out.println("[10] Torna al menu principale");
+            System.out.println("[0] Torna al menu principale");
             System.out.print("Seleziona operazione amministrativa: ");
 
             int sceltaAdmin = leggiNumeroSicuro(scanner);
@@ -226,7 +239,7 @@ public class Application {
                     case 9:
                         // DAO ZONA 3 - Task: Calcolare il tempo medio effettivo di percorrenza di una tratta
                         break;
-                    case 10:
+                    case 0:
                         inAdmin = false;
                         System.out.println("\nRitorno al menu principale...");
                         break;
