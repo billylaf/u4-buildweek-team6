@@ -3,9 +3,7 @@ package team6.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import team6.entities.Abbonamento;
-import team6.entities.AcquistoViaggio;
-import team6.entities.Distributore;
+import team6.entities.*;
 import team6.enums.StatoDistributore;
 import team6.exceptions.DistributoreFuoriServizioException;
 import team6.exceptions.TesseraScadutaException;
@@ -76,9 +74,34 @@ public class AcquistoViaggioDAO {
         return query.getSingleResult(); //restituisce il numero di biglietti in quel rivenditore o macchinetta
     }
 
+    //Timbra un biglietto
+    public void timbraBiglietto(Long idBiglietto, Long idMezzo) {
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+
+            // Cerchiamo il biglietto e il mezzo nel database
+            Biglietto biglietto = em.find(Biglietto.class, idBiglietto);
+            Mezzo mezzo = em.find(Mezzo.class, idMezzo);
+
+            if (biglietto != null && mezzo != null) {
+                // Colleghiamo il biglietto al mezzo e salviamo la data di oggi
+                biglietto.setMezzo(mezzo);
+                biglietto.setDataValidazione(LocalDate.now());
+
+                em.merge(biglietto);
+            } else {
+                System.out.println("Errore: Biglietto o Mezzo non trovato nel database!");
+            }
+
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw e;
+        }
+    }
 
     //query per contare quanti bilgietti sono stati timbrati in un mezzo dato l'id
-
     public long countBigliettiTimbrati(long idMezzo) {
         return this.em
                 .createQuery("SELECT COUNT(b) FROM Biglietto b WHERE b.mezzo.id = :idMezzo AND b.dataValidazione IS NOT NULL", Long.class)

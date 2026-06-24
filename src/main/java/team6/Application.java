@@ -4,24 +4,22 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import team6.dao.*;
-
+import team6.entities.*;
+import team6.enums.StatoDistributore;
+import team6.enums.TipoAbbonamento;
+import team6.exceptions.DistributoreFuoriServizioException;
+import team6.exceptions.ElementoNonTrovatoException;
+import team6.exceptions.EntityNotFoundException;
+import team6.exceptions.TesseraScadutaException;
+import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Application {
     private static final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("u4-buildweek-team6-pu");
 
     public static void main(String[] args) {
         EntityManager em = entityManagerFactory.createEntityManager();
-
-        UtenteDao UtenteDao = new UtenteDao(em);
-        TesseraDao TesseraDao = new TesseraDao(em);
-        PuntoVenditaDao PuntoVenditaDao = new PuntoVenditaDao(em);
-        MezzoDAO MezzoDAO = new MezzoDAO(em);
-        StatoMezzoDAO StatoMezzoDAO = new StatoMezzoDAO(em);
-        TrattaDao TrattaDao = new TrattaDao(em);
-        PercorrenzaDao PercorrenzaDao = new PercorrenzaDao(em);
-        AcquistoViaggioDAO AcquistoViaggioDAO = new AcquistoViaggioDAO(em);
-
         team6.DataSeeder.populateDatabase(em);
 
         System.out.println("--- ...INIZIO SCANNER... ---");
@@ -34,10 +32,10 @@ public class Application {
 
         while (running) {
             System.out.println("\n=============== MENU PRINCIPALE ===============");
-            System.out.println("[1] Entra come Utente");
+            System.out.println("[1 Entra come Utente Semplice");
             System.out.println("[2] Entra come Admin");
             System.out.println("[0] Chiudi il programma");
-            System.out.print("Scelta: ");
+            System.out.print("Seleziona il profilo di accesso: ");
 
             int scelta = sc.nextInt();
             sc.nextLine();
@@ -154,15 +152,24 @@ public class Application {
                 }
 
                 case 0 -> {
-                    System.out.println("APP OFFLINE...");
+                    System.out.println("APP OFFLINE");
                     running = false;
                 }
 
                 default -> System.out.println("!!ATTENZIONE!!Opzione non valida.");
             }
         }
-        em.close();
-        entityManagerFactory.close();
+    }
 
+    private static UUID leggiUuidSicuro(Scanner scanner) {
+        while (true) {
+            System.out.print("Inserisci il codice identificativo UUID della tessera: ");
+            String input = scanner.nextLine().trim();
+            try {
+                return UUID.fromString(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println(" Formato stringa UUID non conforme allo standard del sistema. Riprova.");
+            }
+        }
     }
 }
