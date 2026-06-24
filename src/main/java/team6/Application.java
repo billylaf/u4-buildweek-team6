@@ -34,7 +34,7 @@ public class Application {
 
         while (running) {
             System.out.println("\n=============== MENU PRINCIPALE ===============");
-            System.out.println("[1 Entra come Utente Semplice");
+            System.out.println("[1] Entra come Utente");
             System.out.println("[2] Entra come Admin");
             System.out.println("[0] Chiudi il programma");
             System.out.print("Scelta: ");
@@ -154,7 +154,7 @@ public class Application {
                 }
 
                 case 0 -> {
-                    System.out.println("APP OFFLINE");
+                    System.out.println("APP OFFLINE...");
                     running = false;
                 }
 
