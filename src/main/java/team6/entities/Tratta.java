@@ -19,7 +19,9 @@ public class Tratta {
     @Column(name = "tempo_previsto", nullable = false)
     private int tempoPrevisto;
 
-    public Tratta(){}
+    public Tratta() {
+
+    }
 
     public Tratta(int tempoPrevisto, String capolinea, String zonaPartenza) {
         this.tempoPrevisto = tempoPrevisto;
