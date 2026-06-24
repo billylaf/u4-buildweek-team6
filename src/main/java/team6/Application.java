@@ -310,7 +310,10 @@ public class Application {
 
         Long idMezzo = leggiLongSicuro(scanner);
 
-        if (idMezzo == null) return;
+        if (idMezzo == null) {
+            System.out.println("ID nonn presente nel DATABSE");
+            return;
+        }
 
         long timbrature = AcquistoViaggioDAO.countBigliettiTimbrati(idMezzo);
         System.out.println("Timbrature totali sul mezzo " + idMezzo + ": " + timbrature);
