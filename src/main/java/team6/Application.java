@@ -11,7 +11,9 @@ import team6.exceptions.DistributoreFuoriServizioException;
 import team6.exceptions.ElementoNonTrovatoException;
 import team6.exceptions.EntityNotFoundException;
 import team6.exceptions.TesseraScadutaException;
+
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -207,16 +209,16 @@ public class Application {
                         adminVerificaTessera(scanner, tesseraDao);
                         break;
                     case 4:
-                        // DAO ZONA 2 - Task: Numero di biglietti vidimati su un particolare mezzo
+                        adminTimbratiInMezzoById(scanner, acquistoViaggioDAO);
                         break;
                     case 5:
-                        // DAO ZONA 2 - Task: Numero di biglietti vidimati in totale in un periodo di tempo
+                        adminBigliettiTimbratiByPeriodo(scanner, acquistoViaggioDAO);
                         break;
                     case 6:
                         adminModificaStatoDistributore(scanner, puntoVenditaDao);
                         break;
                     case 7:
-                        // DAO ZONA 2 - Task: Tenere traccia dei periodi di servizio o manutenzione di ogni mezzo
+                        adminStoricoMezzo(scanner, statoMezzoDao);
                         break;
                     case 8:
                         // DAO ZONA 3 - Task: Tenere traccia del numero di volte che un mezzo percorre una tratta
@@ -289,16 +291,59 @@ public class Application {
     }
 
     //Billy
+//case 4
+    private static void adminTimbratiInMezzoById(Scanner scanner, AcquistoViaggioDAO AcquistoViaggioDAO) {
+        System.out.print("ID mezzo: ");
 
+        Long idMezzo = leggiLongSicuro(scanner);
 
+        if (idMezzo == null) return;
 
+        long timbrature = AcquistoViaggioDAO.countBigliettiTimbrati(idMezzo);
+        System.out.println("Timbrature totali sul mezzo " + idMezzo + ": " + timbrature);
+    }
+
+    //case 5
+    private static void adminBigliettiTimbratiByPeriodo(Scanner scanner, AcquistoViaggioDAO acquistoViaggioDAO) {
+        System.out.println("\n[Biglietti Timbrati per Periodo]");
+
+        System.out.println("Data INIZIO periodo:");
+        LocalDate inizioP = leggiDataSicura(scanner);
+
+        System.out.println("Data FINE periodo:");
+        LocalDate fineP = leggiDataSicura(scanner);
+
+        long timbrati = acquistoViaggioDAO.countBigliettiTimbratiByPeriodo(inizioP, fineP);
+        if (timbrati == 0) {
+            System.out.println("Im questo periodo non ci sono biglietti timbrati");
+            return;
+        }
+        System.out.println("Biglietti timbrati nel periodo specificato: " + timbrati);
+    }
+
+    //case 7
+    private static void adminStoricoMezzo(Scanner scanner, StatoMezzoDAO statoMezzoDAO) {
+        System.out.println("\n[Storico Stati di un Mezzo]");
+
+        System.out.print("ID mezzo: ");
+        Long idMezzo = leggiLongSicuro(scanner);
+
+        List<StatoMezzo> storico = statoMezzoDAO.findStoricoByMezzoId(idMezzo);
+
+        if (storico.isEmpty()) {
+            System.out.println("Nessuno stato trovato per il mezzo " + idMezzo);
+            return;
+        }
+
+        System.out.println("Storico stati del mezzo " + idMezzo + ":");
+        storico.forEach(System.out::println);
+    }
     //Fine Billy
 
 
     //Davide
 
 
-    
     //Fine Davide
 
     //Metodi di controllo per gli input
