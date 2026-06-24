@@ -9,6 +9,8 @@ import team6.exceptions.EntityNotFoundException;
 
 import java.util.List;
 
+import static org.postgresql.jdbc.EscapedFunctions.TIMESTAMPDIFF;
+
 public class PercorrenzaDao {
 
     private final EntityManager em;
@@ -78,7 +80,7 @@ public class PercorrenzaDao {
         );
         query.setParameter("idMezzo", idMezzo);
         query.setParameter("idTratta", idTratta);
-        return query.getSingleResult(); // restituisce il numero long di viaggi fatti
+        return query.getSingleResult();
     }
 
     // calcolo dell media percorrenza di una tratta attraverso un id tratta
@@ -95,6 +97,7 @@ public class PercorrenzaDao {
         return percorrenze.stream()
                 .mapToInt(Percorrenza::getPercorrenzaEffettiva).average().orElseThrow();
     }
+
 
 
 }

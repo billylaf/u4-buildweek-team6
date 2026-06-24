@@ -29,6 +29,8 @@ public class Tratta {
         this.zonaPartenza = zonaPartenza;
     }
 
+
+
     public Long getId() {
         return id;
     }
