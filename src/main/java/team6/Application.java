@@ -33,7 +33,19 @@ public class Application {
         //[1] Entra come Utente Semplice
         //[2] Entra come Amministratore
         //[0] Chiudi il programma
-        List<String> options=new ArrayList<>(listOf("AREA UTENTE","[1] Compra un Biglietto","[2] Compra un Abbonamento / Rinnova Tessera", "[3] Sali su un mezzo e timbra il biglietto","ACCESSO AMMINISTRATORE","[4] Guarda quanti biglietti totali sono stati venduti","[5] Guarda i biglietti venduti da un singolo negozio/macchinetta","[6] Controllo bigliettaio: verifica se una tessera è valida","[7] Controllo quante timbrature sono state effettuate su un singolo mezzo","[8] Controllo biglietti timbrati dato un periodo di tempo","[9] Manda un mezzo in manutenzione o rimettilo in servizio","[10] Storico di quante manutenzioni ha fatto un singolo Mezzo","[11] Controlla quante volte un mezzo ha percorso una tratta","[12] Calcola il tempo medio di viaggio di una linea"));
+        List<String> options=new ArrayList<>(listOf("AREA UTENTE",
+                "[1] Compra un Biglietto",
+                "[2] Compra un Abbonamento / Rinnova Tessera",
+                "[3] Sali su un mezzo e timbra il biglietto","ACCESSO AMMINISTRATORE",
+                "[4] Guarda quanti biglietti totali sono stati venduti",
+                "[5] Guarda i biglietti venduti da un singolo negozio/macchinetta",
+                "[6] Controllo bigliettaio: verifica se una tessera è valida",
+                "[7] Controllo quante timbrature sono state effettuate su un singolo mezzo",
+                "[8] Controllo biglietti timbrati dato un periodo di tempo",
+                "[9] Manda un mezzo in manutenzione o rimettilo in servizio",
+                "[10] Storico di quante manutenzioni ha fatto un singolo Mezzo",
+                "[11] Controlla quante volte un mezzo ha percorso una tratta",
+                "[12] Calcola il tempo medio di viaggio di una linea"));
         boolean loop=true;
         Scanner scanner=new Scanner(System.in);
         System.out.println("benvenuto, seleziona un numero per i nostri servizi:");
