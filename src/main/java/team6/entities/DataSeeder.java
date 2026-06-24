@@ -31,7 +31,6 @@ public class DataSeeder {
         em.persist(u4);
         em.persist(u5);
         em.getTransaction().commit();
-        System.out.println("✔ Utenti inseriti");
 
         // ============================================================
         // 2. TESSERE
@@ -48,7 +47,7 @@ public class DataSeeder {
         em.persist(t4);
         em.persist(t5);
         em.getTransaction().commit();
-        System.out.println("✔ Tessere inserite");
+
 
         // ============================================================
         // 3. DISTRIBUTORI
@@ -65,7 +64,7 @@ public class DataSeeder {
         em.persist(d4);
         em.persist(d5);
         em.getTransaction().commit(); // <-- Mancava il commit qui nel tuo vecchio codice!
-        System.out.println("✔ Distributori inseriti");
+
 
         // ============================================================
         // 4. RIVENDITORI
@@ -82,7 +81,7 @@ public class DataSeeder {
         em.persist(r4);
         em.persist(r5);
         em.getTransaction().commit();
-        System.out.println("✔ Rivenditori inseriti");
+
 
         // ============================================================
         // 5. MEZZI
@@ -99,7 +98,7 @@ public class DataSeeder {
         em.persist(m4);
         em.persist(m5);
         em.getTransaction().commit();
-        System.out.println("✔ Mezzi inseriti");
+
 
         // ============================================================
         // 6. STATO MEZZI
@@ -111,7 +110,7 @@ public class DataSeeder {
         em.persist(new StatoMezzo(StatoDiMezzo.IN_MANUTENZIONE, LocalDate.of(2025, 5, 1), "Guasto al motore", LocalDate.of(2025, 5, 8), m3));
         em.persist(new StatoMezzo(StatoDiMezzo.IN_MANUTENZIONE, LocalDate.of(2025, 6, 5), "Revisione programmata annuale", LocalDate.of(2025, 6, 12), m4));
         em.getTransaction().commit();
-        System.out.println("✔ Stati mezzi inseriti");
+
 
         // ============================================================
         // 7. TRATTE
@@ -128,7 +127,7 @@ public class DataSeeder {
         em.persist(tr4);
         em.persist(tr5);
         em.getTransaction().commit();
-        System.out.println("✔ Tratte inserite");
+
 
         // ============================================================
         // 8. PERCORRENZE
@@ -140,7 +139,7 @@ public class DataSeeder {
         em.persist(new Percorrenza(Timestamp.valueOf("2025-06-02 10:00:00"), Timestamp.valueOf("2025-06-02 10:14:00"), m3, tr3));
         em.persist(new Percorrenza(Timestamp.valueOf("2025-06-03 11:00:00"), Timestamp.valueOf("2025-06-03 11:33:00"), m4, tr4));
         em.getTransaction().commit();
-        System.out.println("✔ Percorrenze inserite");
+
 
         // ============================================================
         // 9. BIGLIETTI
@@ -168,7 +167,7 @@ public class DataSeeder {
         em.persist(b4);
         em.persist(b5);
         em.getTransaction().commit();
-        System.out.println("✔ Biglietti inseriti");
+
 
         // ============================================================
         // 10. ABBONAMENTI
@@ -180,8 +179,8 @@ public class DataSeeder {
         em.persist(new Abbonamento(LocalDate.of(2025, 6, 17), 10.00, r3, TipoAbbonamento.SETTIMANALE, t3));
         em.persist(new Abbonamento(LocalDate.of(2025, 6, 5), 35.00, r5, TipoAbbonamento.MENSILE, t5));
         em.getTransaction().commit();
-        System.out.println("✔ Abbonamenti inseriti");
 
-        System.out.println("=== SEED COMPLETATO: 5 record per ogni tabella ===\n");
+
+        System.out.println("===DATI INSERITI CON SUCCESSO NEL DATABASE ===\n");
     }
 }
