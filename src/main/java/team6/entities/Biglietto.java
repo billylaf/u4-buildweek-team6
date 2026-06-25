@@ -3,6 +3,7 @@ package team6.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "biglietti")
@@ -15,15 +16,20 @@ public class Biglietto extends AcquistoViaggio {
     @JoinColumn(name = "id_mezzo")
     private Mezzo mezzo; // Il bus o tram su cui viene timbrato il biglietto
 
+    @Column(name = "codice_biglietto", unique = true, nullable = false)
+    private UUID codiceBiglietto;
 
     public Biglietto() {
+        super();
+        this.codiceBiglietto = UUID.randomUUID();
     }
 
 
     public Biglietto(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita) {
         super(dataAcquisto, prezzo, puntoVendita); // Passa i dati alla classe papà (AcquistoViaggio)
         this.dataValidazione = null; // All'inizio è nuovo, quindi non ha una data di timbratura
-        this.mezzo = null;           // All'inizio non è ancora salito su nessun mezzo
+        this.mezzo = null;// All'inizio non è ancora salito su nessun mezzo
+        this.codiceBiglietto = UUID.randomUUID();
     }
 
     //Metodo per capire se il biglietto è stato già usato o no
@@ -47,11 +53,16 @@ public class Biglietto extends AcquistoViaggio {
         this.mezzo = mezzo;
     }
 
+    public UUID getCodiceBiglietto() {
+        return codiceBiglietto;
+    }
+
     @Override
     public String toString() {
         return "Biglietto{" +
                 "dataValidazione=" + dataValidazione +
                 ", mezzo=" + mezzo +
+                ", codiceBiglietto=" + codiceBiglietto +
                 '}';
     }
 }

@@ -4,32 +4,43 @@ import jakarta.persistence.*;
 import team6.enums.TipoAbbonamento;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Entity
 @Table(name = "abbonamento")
-public class Abbonamento extends AcquistoViaggio{
+public class Abbonamento extends AcquistoViaggio {
     @Enumerated(EnumType.STRING)
     private TipoAbbonamento tipo;
 
     @Column(name = "data_scadenza")
     private LocalDate dataScadenza;
 
+    @Column(name = "codice_abbonamento", unique = true, nullable = false)
+    private UUID codiceAbbonamento;
     @ManyToOne
     @JoinColumn(name = "id_tessera")
     private Tessera tessera;
 
-    public Abbonamento(){}
 
-    public Abbonamento(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita, TipoAbbonamento tipo, Tessera tessera){
+    public Abbonamento() {
+        this.codiceAbbonamento = UUID.randomUUID();
+    }
+
+    public Abbonamento(LocalDate dataAcquisto, double prezzo, PuntoVendita puntoVendita, TipoAbbonamento tipo, Tessera tessera) {
         super(dataAcquisto, prezzo, puntoVendita);
-        this.tipo=tipo;
-        this.tessera=tessera;
+        this.tipo = tipo;
+        this.tessera = tessera;
+        this.codiceAbbonamento = UUID.randomUUID();
         // Calcolo con un if se è settimanale scadenza a sette giorni mensile 1 mese utilizzo i metodi di localdate confrontandolo con l'enum
         if (tipo == TipoAbbonamento.SETTIMANALE) {
             this.dataScadenza = dataAcquisto.plusDays(7);
         } else {
             this.dataScadenza = dataAcquisto.plusMonths(1);
         }
+    }
+
+    public UUID getCodiceAbbonamento() {
+        return codiceAbbonamento;
     }
 
     public TipoAbbonamento getTipo() {
@@ -61,10 +72,8 @@ public class Abbonamento extends AcquistoViaggio{
         return "Abbonamento{" +
                 "tipo=" + tipo +
                 ", dataScadenza=" + dataScadenza +
+                ", codiceAbbonamento=" + codiceAbbonamento +
                 ", tessera=" + tessera +
                 '}';
     }
 }
-
-
-
