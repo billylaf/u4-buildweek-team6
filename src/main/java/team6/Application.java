@@ -11,6 +11,7 @@ import team6.exceptions.DistributoreFuoriServizioException;
 import team6.exceptions.ElementoNonTrovatoException;
 import team6.exceptions.EntityNotFoundException;
 import team6.exceptions.TesseraScadutaException;
+import team6.utils.QRCodeGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -162,6 +163,10 @@ public class Application {
 
         Biglietto nuovoBiglietto = new Biglietto(LocalDate.now(), 1.50, pvB);
         acquistoViaggioDAO.save(nuovoBiglietto);
+        System.out.println("ID: " + nuovoBiglietto.getId());
+        System.out.println("Prezzo: " + nuovoBiglietto.getPrezzo() + "€");
+        String qrCode = QRCodeGenerator.generateSimpleASCIIQRCode(nuovoBiglietto.getCodiceBiglietto().toString());
+        System.out.println(qrCode);
     }
 
     private static void azioneGestisciAbbonamentoETessera(Scanner scanner, PuntoVenditaDao puntoVenditaDao, AcquistoViaggioDAO acquistoViaggioDAO, TesseraDao tesseraDao, Tessera tesseraLoggata) {
@@ -186,6 +191,9 @@ public class Application {
             acquistoViaggioDAO.save(nuovoAbb);
 
             System.out.println("Abbonamento acquistato con successo al prezzo di " + prezzo + "€!");
+            String qrCode = QRCodeGenerator.generateSimpleASCIIQRCode(nuovoAbb.getCodiceAbbonamento().toString());
+            System.out.println(qrCode);
+
         } else if (sceltaSottoOpzione == 2) {
             tesseraDao.rinnovaTessera(tesseraLoggata.getId());
         } else {
@@ -380,9 +388,9 @@ public class Application {
         System.out.print("Inserisci l'ID della Tratta da analizzare: ");
         Long idTratta = leggiLongSicuro(scanner);
 
-            Tratta tratta = trattaDao.findById(idTratta);
-            Double tempoMedio = percorrenzaDao.calcolaTempoMedioEffettivo(idTratta);
-            System.out.println("Il tempo medio effettivo di percorrenza per la tratta " + idTratta + " è di " + String.format("%.2f", tempoMedio) + " minuti.");
+        Tratta tratta = trattaDao.findById(idTratta);
+        Double tempoMedio = percorrenzaDao.calcolaTempoMedioEffettivo(idTratta);
+        System.out.println("Il tempo medio effettivo di percorrenza per la tratta " + idTratta + " è di " + String.format("%.2f", tempoMedio) + " minuti.");
     }
 
     //Fine Davide
