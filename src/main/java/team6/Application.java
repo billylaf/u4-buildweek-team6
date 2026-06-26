@@ -113,7 +113,7 @@ public class Application {
                 System.out.println("[1] Compra un Biglietto");
                 System.out.println("[2] Compra un Abbonamento / Rinnova Tessera");
                 System.out.println("[3] Sali su un mezzo e timbra il biglietto");
-                System.out.println("[4] Torna al menu principale");
+                System.out.println("[0] Torna al menu principale");
                 System.out.print("Seleziona operazione: ");
 
                 int sceltaUtente = leggiNumeroSicuro(scanner);
@@ -141,7 +141,7 @@ public class Application {
                             System.out.println("\nUscita dal menu utente...");
                             break;
                         default:
-                            System.out.println(" Opzione non valida! Inserisci un valore compreso tra 1 e 4.");
+                            System.out.println(" Opzione non valida! Inserisci un valore compreso tra 0 e 3.");
                     }
                 } catch (DistributoreFuoriServizioException | TesseraScadutaException | ElementoNonTrovatoException e) {
                     System.out.println("Errore di Business: " + e.getMessage());
