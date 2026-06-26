@@ -136,7 +136,7 @@ public class Application {
                             acquistoViaggioDAO.timbraBiglietto(idBiglietto, idMezzo);
                             System.out.println("Biglietto annullato e registrato sul mezzo ID: " + idMezzo);
                             break;
-                        case 4:
+                        case 0:
                             inUtente = false;
                             System.out.println("\nUscita dal menu utente...");
                             break;
@@ -165,7 +165,7 @@ public class Application {
         acquistoViaggioDAO.save(nuovoBiglietto);
         System.out.println("ID: " + nuovoBiglietto.getId());
         System.out.println("Prezzo: " + nuovoBiglietto.getPrezzo() + "€");
-        String qrCode = QRCodeGenerator.generateSimpleASCIIQRCode(nuovoBiglietto.getCodiceBiglietto().toString());
+        String qrCode = QRCodeGenerator.generateQRCode(nuovoBiglietto.getCodiceBiglietto().toString());
         System.out.println(qrCode);
     }
 
@@ -191,7 +191,7 @@ public class Application {
             acquistoViaggioDAO.save(nuovoAbb);
 
             System.out.println("Abbonamento acquistato con successo al prezzo di " + prezzo + "€!");
-            String qrCode = QRCodeGenerator.generateSimpleASCIIQRCode(nuovoAbb.getCodiceAbbonamento().toString());
+            String qrCode = QRCodeGenerator.generateQRCode(nuovoAbb.getCodiceAbbonamento().toString());
             System.out.println(qrCode);
 
         } else if (sceltaSottoOpzione == 2) {
