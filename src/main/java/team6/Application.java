@@ -35,7 +35,7 @@ public class Application {
         TrattaDao trattaDao = new TrattaDao(em);
 
         final String USER = "admin";
-        final String PASS = "Admin1234";
+        final String PASS = "admin123";
 
 
         boolean programmaAttivo = true;
